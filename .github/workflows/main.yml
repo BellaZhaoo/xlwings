@@ -34,9 +34,9 @@ jobs:
       shell: bash
       run: |
         mkdir ./aspose
-        curl -sSL https://www.nuget.org/api/v2/package/Aspose.Cells/17.12.0 -o ./aspose/aspose.cells.nupkg
-        tar -xvzf ./aspose/aspose.cells.nupkg
-        cd ./aspose && ls -l ./aspose
+        curl -L https://www.nuget.org/api/v2/package/Aspose.Cells/17.12.0 -o ./aspose/aspose.cells.nupkg
+        unzip ./aspose/aspose.cells.nupkg -d ./aspose/
+        cd ./aspose && ls -l
     - name: Build dlls
       run: |
         cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
