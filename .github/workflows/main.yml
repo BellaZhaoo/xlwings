@@ -37,6 +37,7 @@ jobs:
         mkdir ./aspose
         tar -xvzf ./aspose.cells.nupkg -C ./aspose/
     - name: Build dlls
+      run: |
         cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\xlwings.sln /p:Configuration=Release
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\xlwings.sln /p:Configuration=Release /p:Platform=x64
