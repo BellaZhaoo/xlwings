@@ -30,11 +30,13 @@ jobs:
       run: |
         python -m pip install wheel twine pathlib
         python -m pip install pythonnet
-    - name: Install Aspose and build dlls
+    - name: Install Aspose
+      shell: bash
       run: |
-        Invoke-WebRequest -Uri https://www.nuget.org/api/v2/package/Aspose.Cells/17.12.0 -OutFile .\aspose.cells.nupkg
-        mkdir .\aspose
-        tar -xvzf .\aspose.cells.nupkg -C .\aspose
+        curl -sSL https://www.nuget.org/api/v2/package/Aspose.Cells/17.12.0 -o ./aspose.cells.nupkg
+        mkdir ./aspose
+        tar -xvzf ./aspose.cells.nupkg -C ./aspose/
+    - name: Build dlls
         cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\xlwings.sln /p:Configuration=Release
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\src\xlwings.sln /p:Configuration=Release /p:Platform=x64
